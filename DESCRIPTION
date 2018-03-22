@@ -22,6 +22,5 @@ Description:
  working example is given in the help page for function `interpolant()',
  which should be the first point of reference.
 License: GPL
-Packaged: 2011-03-30 08:55:22 UTC; rksh
 URL: https://github.com/RobinHankin/emulator.git
 BugReports: https://github.com/RobinHankin/issues
