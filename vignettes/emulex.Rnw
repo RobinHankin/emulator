@@ -1,0 +1,222 @@
+% -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
+%\VignetteIndexEntry{Emulex: a cookbook for the emulator package}
+%\VignetteDepends{emulator}
+%\VignetteKeywords{emulator, BACCO, R}
+%\VignettePackage{emulator}
+
+\documentclass[nojss]{jss}
+
+\usepackage{amsfonts}
+
+
+%% just as usual
+\author{Robin K. S. Hankin\\Auckland University of Technology}
+\title{Creating a simple \pkg{emulator} case study from scratch: a cookbook}
+
+
+%% for pretty printing and a nice hypersummary also set:
+\Plainauthor{Robin K. S. Hankin}
+\Plaintitle{Creating a simple emulator case study from scratch: a cookbook}
+\Shorttitle{An emulator cookbook}
+
+%% an abstract and keywords
+\Abstract{
+
+  This document constructs a minimal working example of a simple
+  application of the \pkg{emulator} package, step by step.  Datasets
+  and functions have a {\tt .vig} suffix, representing ``vignette''.
+}
+
+\Keywords{emulator, BACCO, \proglang{R}}
+\Plainkeywords{emulator, BACCO, R}
+
+\Address{
+  Robin K. S. Hankin\\
+  Auckland University of Technology\\
+  Wakefield Street, Auckland, NZ\\
+  E-mail: \email{hankin.robin@gmail.com}
+}
+%% It is also possible to add a telephone and fax number
+%% before the e-mail in the following format:
+%% Telephone: +43/1/31336-5053
+%% Fax: +43/1/31336-734
+
+%% for those who use Sweave please include the following line (with % symbols):
+%% need no \usepackage{Sweave.sty}
+
+%% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\SweaveOpts{echo=FALSE}
+\begin{document}
+
+\newsymbol\leqslant 1336
+
+\SweaveOpts{echo=TRUE}
+
+\section{Introduction}
+Package \pkg{emulator} of bundle \pkg{BACCO} performs Bayesian
+emulation of computer models.  This document constructs a minimal
+working example of a simple problem, step by step.  Datasets and
+functions have a {\tt .vig} suffix, representing ``vignette''.
+
+This document is not a substitute for~\cite{kennedy2001a}
+or~\cite{kennedy2001b} or~\cite{hankin2005} or the online help files
+in \pkg{BACCO}.  It is not intended to stand alone: for example, the
+notation used here is that of~\cite{kennedy2001a,kennedy2001b}, and
+the user is expected to consult the online help in the \pkg{BACCO}
+package when appropriate.
+
+This document is primarily didactic, although it is informal.
+
+Nevertheless, many of the points raised here are duplicated in the
+\pkg{BACCO} helpfiles.
+
+The author would be delighted to know of any improvements or suggestions.
+Email me at {\tt hankin.robin@gmail.com}.
+
+\section{List of objects that the user needs to supply}
+
+
+The user needs to supply three objects:
+\begin{itemize}
+\item A design matrix, here {\tt val.vig} (rows of this show where the
+code has been evaluated)
+\item Basis functions.  Here {\tt basis.vig()}.  This shows the basis
+functions used for fitting the prior
+\item Data, here {\tt z.vig}.  This shows the data obtained from
+evaluating the various levels of code at the points given by the
+design matrix and the subsets object.
+\end{itemize}
+Each of these is discussed in a separate subsection below.
+
+But the first thing we need to do is install the library:
+<<loadlibrary,echo=FALSE,results=hide>>=
+library("emulator")
+@ 
+
+
+<<datagen_design_matrix, echo=false, results=hide>>=
+n <- 30
+val.vig <- latin.hypercube(n,2)
+@
+
+
+\subsection{Design matrix: USER TO SUPPLY}
+
+In these sections I show the objects that the user needs to supply,
+under a heading like the one above.  In the case of the {\tt emulator}
+we need a design matrix and a vector of outputs.
+
+The first thing needed is the design matrix {\tt val.vig}, ie the
+points in parameter space at which the lowest-level code is executed.
+The example here has just two parameters, {\tt a} and {\tt b}:
+<<headval>>=
+head(val.vig)
+nrow(val.vig)
+@ 
+
+Notes
+\begin{itemize}
+\item Each row is a point in parameter space, here two dimensional.
+\item The parameters are labelled {\tt a} and {\tt b}
+\end{itemize}
+
+
+\subsection{Basis functions: USER TO SUPPLY}
+Now we need to choose a basis function.  Do this by copying {\tt
+basis.toy()} but fiddling with it:
+
+<<basisvig>>=
+basis.vig <- 
+function (x) 
+{
+        out <- c(1, x , x[1]*x[2])
+        names(out) <- c("const", LETTERS[1:2], "interaction")
+        return(out)
+}
+@ 
+
+
+Notes
+\begin{itemize}
+\item This is shamelessly ripped off from {\tt basis.toy()}, except
+that I've changed the basis to be {\tt c(1,a,b,ab)}.
+\item in the function, {\tt out} is a vector of length four: {\tt
+    c(1,x[1],x[2], x[1]*x[2])}. 
+\end{itemize}
+
+<<datagen, echo=false, results=hide>>=
+REAL.BETA <- 1:4
+REAL.SCALES <- c(3,6)
+REAL.SIGMASQUARED <- 0.3
+
+A <- corr.matrix(xold=val.vig,scales=REAL.SCALES)
+
+z.vig  <- 
+as.vector(rmvnorm(n=1,mean=crossprod(REAL.BETA,apply(val.vig,1,basis.vig)),sigma=A*REAL.SIGMASQUARED))
+@ 
+
+\subsection{Data: USER TO SUPPLY}
+
+The data we have for the {\tt .vig} example is a vector whose elements
+are the output of the code at the points specified in {\tt val.vig}:
+
+<<headzvig>>=
+head(z.vig)
+summary(z.vig)
+@ 
+
+\section{Data analysis}
+
+The previous section showed what data and functions the user needs to
+supply.  These all have a {\tt .vig} suffix.   This section shows the
+data being analyzed.
+
+
+First we will estimate the scales to use:
+
+<<optScales,cache=TRUE>>=
+os <- optimal.scales(val=val.vig, scales.start=c(10,10), d=z.vig, func=basis.vig)
+os
+@ 
+
+
+So we can estimate the coefficients.  But first we have to calculate
+the variance matrix and invert it:
+
+<<printOptScales>>=
+A.os <- corr.matrix(xold=val.vig,scales=REAL.SCALES)
+Ainv.os <- solve(A)
+@ 
+
+Given this, use {\tt betahat.fun()} to get the coeffs:
+
+<<usebeta>>=
+betahat.fun(xold=val.vig, d=z.vig, Ainv=solve(A),func=basis.vig)
+@ 
+
+
+The central function is interpolant:
+
+<<useinterpolant>>=
+interpolant(x=c(0.5,0.5), d=z.vig, Ainv=Ainv.os, scales=os,
+xold=val.vig, func=basis.vig, give.full.list=TRUE)
+@ 
+
+And that's it, really.
+
+
+\bibliography{uncertainty}
+
+\clearpage
+\appendix
+\section{Data generation}
+
+The data used in this study were created by directly sampling from the
+appropriate multivariate Gaussian:
+<<displaybutdonotevaldatagen,eval=false>>=
+<<datagen>>
+@
+
+\end{document}

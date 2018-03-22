@@ -1,0 +1,7 @@
+exportPattern("^[^\\.]")
+
+import("mvtnorm")
+
+importFrom("graphics", "legend", "lines", "plot", "points")
+importFrom("stats", "optim", "optimize", "qnorm", "qunif")
+importFrom("utils", "write.table")
