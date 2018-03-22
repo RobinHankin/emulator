@@ -2,7 +2,7 @@ Package: emulator
 Type: Package
 Title: Bayesian Emulation of Computer Programs
 Version: 1.2-16
-Date: 2017-04-23
+Date: 2018-03-23
 Author: Robin K. S. Hankin
 Depends: R (>= 3.0.1), mvtnorm
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
@@ -23,4 +23,4 @@ Description:
  which should be the first point of reference.
 License: GPL
 URL: https://github.com/RobinHankin/emulator.git
-BugReports: https://github.com/RobinHankin/issues
+BugReports: https://github.com/RobinHankin/emulator/issues
