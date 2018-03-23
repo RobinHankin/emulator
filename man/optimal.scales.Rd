@@ -38,7 +38,7 @@ FALSE, func=regressor.basis, ...)
   not their logarithms.
 
   The reason that there are two separate functions is that
-  \code{optim()} and \code{optimize()} are vey different. 
+  \code{optim()} and \code{optimize()} are very different. 
 }
 \value{
   If \code{give.answers} takes the default value of \code{FALSE}, a
