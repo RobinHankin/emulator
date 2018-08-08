@@ -1,7 +1,7 @@
 Package: emulator
 Type: Package
 Title: Bayesian Emulation of Computer Programs
-Version: 1.2-17
+Version: 1.2-18
 Date: 2018-05-22
 Author: Robin K. S. Hankin
 Depends: R (>= 3.0.1), mvtnorm
