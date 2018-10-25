@@ -30,7 +30,7 @@ ht <- function(x){  #Hermitian transpose
  }
 }
 
-"quad.form" <-
+"quad.form" <-  # x' M x
 function (M, x, chol = FALSE)
 {
     if (chol == FALSE) {
@@ -42,41 +42,41 @@ function (M, x, chol = FALSE)
     }
 }
 
-"quad.form.inv" <-
+"quad.form.inv" <-  # x' M^-1 x
 function (M, x)
 {
     drop(cprod(x, solve(M, x)))
 }
 
-"quad.3form" <-
+"quad.3form" <-  # left' M right
 function(M,left,right)
 {
  cprod(cprod(M,left),right)
 }  
 
-"quad.3tform" <- function(M,left,right)
+"quad.3tform" <- function(M,left,right)   # left M right'
 {
   tcprod(left,tcprod(right,M))
 }
 
-"quad.tform" <-
+"quad.tform" <- # x M x'
 function(M,x)
 {  
  tcprod(tcprod(x,M),x)
 }
 
-"quad.tform.inv" <-
+"quad.tform.inv" <-  # x M^-1 x'
 function(M,x){
  drop(quad.form.inv(M,ht(x)))
 }
 
-"quad.diag" <- 
-function(M,x){   # algebraically, diag(quad.form(M,x))
+"quad.diag" <-   # diag(quad.form(M,x)) == diag(x' M x)
+function(M,x){   
     colSums( cprod(M,x) * Conj(x))
 }
 
-"quad.tdiag" <-
-function(M,x){   # algebraically, diag(quad.tform(M,x))
+"quad.tdiag" <-  # diag(quad.tform(M,x)) == diag(x M x')
+function(M,x){   
     rowSums( tcprod(x,M) * Conj(x))
 }
 
