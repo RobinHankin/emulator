@@ -56,13 +56,13 @@ function(M,left,right)
 
 "quad.3tform" <- function(M,left,right)   # left M right'
 {
-  tcprod(left,tcprod(right,M))
+  tcrossprod(left,tcrossprod(Conj(right),M))
 }
 
 "quad.tform" <- # x M x'
 function(M,x)
 {  
- tcprod(tcprod(x,M),x)
+  tcrossprod(x,tcrossprod(Conj(x),M))
 }
 
 "quad.tform.inv" <-  # x M^-1 x'
@@ -72,12 +72,12 @@ function(M,x){
 
 "quad.diag" <-   # diag(quad.form(M,x)) == diag(x' M x)
 function(M,x){   
-    colSums( cprod(M,x) * Conj(x))
+  colSums(crossprod(M,Conj(x)) * x)
 }
 
 "quad.tdiag" <-  # diag(quad.tform(M,x)) == diag(x M x')
 function(M,x){   
-    rowSums( tcprod(x,M) * Conj(x))
+  rowSums(tcrossprod(Conj(x), M) * x)
 }
 
 #"cmahal" <- 

@@ -1,0 +1,147 @@
+---
+title: "Quadratic form testing vignette"
+author: "Robin K. S. Hankin"
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{quadratic form tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r set-options, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", dev = "png", fig.width = 7, fig.height = 3.5, message = FALSE, warning = FALSE)
+options(width = 80, tibble.width = Inf)
+```
+
+# Testing for ```quad.form()``` et seq
+
+The emulator package included a serious bug in the ```quad.form()```
+family of functions in which the complex conjugate of the correct
+answer was returned (which did not matter in my usual use-case because
+my matrices were Hermitian).  This short vignette demonstrates that
+the bug has been fixed.  Note that the fix was considerably more
+complicated than simply returning the complex conjugate of the old
+functions' value, which would have been terribly inefficient.  The
+actual fix avoids taking more conjugates than absolutely necessary.
+
+The vignette checks all the functions in the serires, including the
+ones that have not been changed such as ```quad.form.inv()```.
+
+
+```{r}
+library("emulator")
+library("cmvnorm")
+```
+
+First set up a csquare matrix ```M``` with complex entries (NB: not
+Hermitian!), and a couple of rectangular matrices, also complex:
+
+```{r}
+M <- matrix(rcnorm(4),2,2)
+x <- matrix(rcnorm(6),2,3)
+y <- matrix(rcnorm(6),3,2)
+x1 <- matrix(rcnorm(6),2,3)
+y1 <- matrix(rcnorm(6),3,2)
+```
+
+Set up a numerical tester function:
+
+```{r}
+tester <- function(a,b,TOL=1e-15){stopifnot(all(abs(a-b)< TOL))}
+```
+
+### ``ht(x)```, Hermitian transpose, $x^*=\overline{x'}$:
+
+```{r}
+(jj1 <- Conj(t(x)))
+(jj2 <- t(Conj(x)))
+(jj3 <- ht(x))
+tester(jj1,jj3)
+tester(jj2,jj3)
+```
+
+### ```cprod()```, $x^*y$:
+
+```{r}
+(jj1 <- ht(x) %*% x1)
+(jj2 <- cprod(x,x1))
+tester(jj1,jj2)
+```
+
+### ```tcprod()```, $x y^*$:
+```{r}
+(jj1 <- ht(x1) %*% x)
+(jj2 <- cprod(x1,x))
+tester(jj1,jj2)
+```
+
+###  ```quad.form()```, $x^*Mx$:
+
+```{r}
+(jj1 <- ht(x) %*% M %*% x)
+(jj2 <- quad.form(M,x))
+tester(jj1,jj2)
+```
+
+###  ```quad.form.inv()```, $x^*M^{-1}x$:
+
+```{r}
+(jj1 <- ht(x) %*% solve(M) %*% x)
+(jj2 <- quad.form(solve(M),x))
+max(abs(jj1-jj2))
+```
+
+###  ```quad.3form()```, $x^*My$:
+
+```{r}
+(jj1 <- ht(x) %*% M %*% x1)
+(jj2 <- quad.3form(M,x,x1))
+tester(jj1,jj2)
+```
+
+###  ```quad.3tform()```, $xMy^*$:
+
+```{r}
+(jj1 <- y %*% M %*% ht(y1))
+(jj2 <- quad.3tform(M,y,y1))
+tester(jj1,jj2)
+```
+
+###  ```quad.tform()```, $xMx^*$:
+
+```{r}
+(jj1 <- y %*% M %*% ht(y))
+(jj2 <- quad.tform(M,y))
+tester(jj1,jj2)
+```
+
+
+### ```quad.tform.inv()```, $xM^{-1}x^*$:
+
+```{r}
+(jj1 <- y %*% solve(M) %*% ht(y))
+(jj2 <- quad.tform.inv(M,y))
+tester(jj1,jj2)
+```
+
+###  ```quad.diag()```, $\operatorname{diag}(x^*Mx)$, ```diag(quad.form())```:
+
+```{r}
+(jj1 <- diag(ht(x) %*% M %*% x))
+(jj2 <- diag(quad.form(M,x)))
+(jj3 <- quad.diag(M,x))
+tester(jj1,jj3)
+tester(jj2,jj3)
+```
+
+###  ```quad.tdiag()```, $\operatorname{diag}(xMx^*)$, ```diag(quad.tform())```:
+
+```{r}
+(jj1 <- diag(y %*% M %*% ht(y)))
+(jj2 <- diag(quad.tform(M,y)))
+(jj3 <- quad.tdiag(M,y))
+tester(jj1,jj3)
+tester(jj2,jj3)
+```
+
+
