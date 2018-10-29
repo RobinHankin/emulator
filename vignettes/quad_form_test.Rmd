@@ -2,10 +2,9 @@
 title: "Quadratic form testing vignette"
 author: "Robin K. S. Hankin"
 date: "`r Sys.Date()`"
-vignette: >
-  %\VignetteIndexEntry{quadratic form tests}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: pdf_document
+vignette: |
+  %\VignetteIndexEntry{quadratic form tests} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
 
 ```{r set-options, echo = FALSE}
@@ -145,3 +144,22 @@ tester(jj2,jj3)
 ```
 
 
+### ```quad.3diag()```, $\operatorname{diag}(x^*My)$
+
+```{r}
+(jj1 <- diag(ht(x) %*% M %*% x1))
+(jj2 <- diag(quad.3form(M,x,x1)))
+(jj3 <- quad.3diag(M,x,x1))
+tester(jj1,jj3)
+tester(jj2,jj3)
+```
+
+### ```quad.3tdiag()```, $\operatorname{diag}(xMy^T)$
+
+```{r}
+(jj1 <- diag(y %*% M %*% ht(y1)))
+(jj2 <- diag(quad.3tform(M,y,y1)))
+(jj3 <- quad.3tdiag(M,y,y1))
+tester(jj1,jj3)
+tester(jj2,jj3)
+```

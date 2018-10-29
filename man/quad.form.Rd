@@ -7,6 +7,8 @@
 \alias{quad.tform.inv}
 \alias{quad.diag}
 \alias{quad.tdiag}
+\alias{quad.3diag}
+\alias{quad.3tdiag}
 \alias{cprod}
 \alias{tcprod}
 \alias{ht}
@@ -51,6 +53,13 @@
     
     \item Function \code{quad.tdiag(M,x)} similarly returns the diagonal of
     \code{quad.tform(M,x)}
+
+    \item Function \code{quad.3diag(M,l,r)} returns the diagonal of
+    \code{quad.3form(M,l,r)} 
+
+    \item Function \code{quad.3tdiag(M,l,r)} returns the diagonal of
+    \code{quad.3tform(M,l,r)} 
+
   }
     
   These functions invoke the following lower-level calls:
@@ -79,6 +88,8 @@ quad.3tform(M,left,right)
 quad.tform.inv(M,x)
 quad.diag(M,x)
 quad.tdiag(M,x)
+quad.3diag(M,left,right)
+quad.3tdiag(M,left,right)
 cprod(x,y)
 tcprod(x,y)
 ht(x)

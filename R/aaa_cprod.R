@@ -80,6 +80,14 @@ function(M,x){
   rowSums(tcrossprod(Conj(x), M) * x)
 }
 
+"quad.3diag" <- function(M,left,right){
+  colSums(crossprod(M, Conj(left)) * right)
+}
+
+"quad.3tdiag" <- function(M,left,right){
+  colSums(t(left) * tcprod(M, right))
+}
+
 #"cmahal" <- 
 #    function (z, center, cov, inverted = FALSE, ...) 
 #{
