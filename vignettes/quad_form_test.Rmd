@@ -2,9 +2,10 @@
 title: "Quadratic form testing vignette"
 author: "Robin K. S. Hankin"
 date: "`r Sys.Date()`"
-output: pdf_document
-vignette: |
-  %\VignetteIndexEntry{quadratic form tests} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+vignette: >
+  %\VignetteIndexEntry{quadratic form tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r set-options, echo = FALSE}
