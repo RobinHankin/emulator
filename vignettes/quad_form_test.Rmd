@@ -33,7 +33,7 @@ library("emulator")
 library("cmvnorm")
 ```
 
-First set up a csquare matrix ```M``` with complex entries (NB: not
+First set up a square matrix ```M``` with complex entries (NB: not
 Hermitian!), and a couple of rectangular matrices, also complex:
 
 ```{r}
@@ -50,7 +50,7 @@ Set up a numerical tester function:
 tester <- function(a,b,TOL=1e-13){stopifnot(all(abs(a-b)< TOL))}
 ```
 
-## Test of ```ht(x)```, Hermitian transpose, $x^*=\overline{x'}$:
+## Test of ```ht(x)``` = $x^*$ = $\overline{x'}$ (Hermitian transpose):
 
 ```{r}
 (jj1 <- Conj(t(x)))
@@ -60,7 +60,7 @@ tester(jj1,jj3)
 tester(jj2,jj3)
 ```
 
-## Test of ```cprod()```, $x^*y$:
+## Test of ```cprod()``` = $x^*y$:
 
 ```{r}
 (jj1 <- ht(x) %*% x1)
@@ -68,14 +68,14 @@ tester(jj2,jj3)
 tester(jj1,jj2)
 ```
 
-## Test of ```tcprod()```, $x y^*$:
+## Test of ```tcprod()``` = $x y^*$:
 ```{r}
 (jj1 <- ht(x1) %*% x)
 (jj2 <- cprod(x1,x))
 tester(jj1,jj2)
 ```
 
-## Test of ```quad.form()```, $x^*Mx$:
+## Test of ```quad.form()``` = $x^*Mx$:
 
 ```{r}
 (jj1 <- ht(x) %*% M %*% x)
@@ -83,7 +83,7 @@ tester(jj1,jj2)
 tester(jj1,jj2)
 ```
 
-##  Test of ```quad.form.inv()```, $x^*M^{-1}x$:
+##  Test of ```quad.form.inv()``` = $x^*M^{-1}x$:
 
 ```{r}
 (jj1 <- ht(x) %*% solve(M) %*% x)
@@ -91,7 +91,7 @@ tester(jj1,jj2)
 max(abs(jj1-jj2))
 ```
 
-##  Test of ```quad.3form()```, $x^*My$:
+##  Test of ```quad.3form()``` = $x^*My$:
 
 ```{r}
 (jj1 <- ht(x) %*% M %*% x1)
@@ -99,7 +99,7 @@ max(abs(jj1-jj2))
 tester(jj1,jj2)
 ```
 
-## Test of ```quad.3tform()```, $xMy^*$:
+## Test of ```quad.3tform()``` = $xMy^*$:
 
 ```{r}
 (jj1 <- y %*% M %*% ht(y1))
@@ -107,7 +107,7 @@ tester(jj1,jj2)
 tester(jj1,jj2)
 ```
 
-## Test of ```quad.tform()```, $xMx^*$:
+## Test of ```quad.tform()``` = $xMx^*$:
 
 ```{r}
 (jj1 <- y %*% M %*% ht(y))
@@ -116,7 +116,7 @@ tester(jj1,jj2)
 ```
 
 
-## Test of ```quad.tform.inv()```, $xM^{-1}x^*$:
+## Test of ```quad.tform.inv()``` = $xM^{-1}x^*$:
 
 ```{r}
 (jj1 <- y %*% solve(M) %*% ht(y))
@@ -124,7 +124,7 @@ tester(jj1,jj2)
 tester(jj1,jj2)
 ```
 
-## Test of ```quad.diag()```, $\operatorname{diag}(x^*Mx)$, ```diag(quad.form())```:
+## Test of ```quad.diag()``` = $\operatorname{diag}(x^*Mx)$ = ```diag(quad.form())```:
 
 ```{r}
 (jj1 <- diag(ht(x) %*% M %*% x))
@@ -134,7 +134,7 @@ tester(jj1,jj3)
 tester(jj2,jj3)
 ```
 
-##  Test of ```quad.tdiag()```, $\operatorname{diag}(xMx^*)$, ```diag(quad.tform())```:
+##  Test of ```quad.tdiag()``` =  $\operatorname{diag}(xMx^*)$ = ```diag(quad.tform())```:
 
 ```{r}
 (jj1 <- diag(y %*% M %*% ht(y)))
@@ -144,7 +144,7 @@ tester(jj1,jj3)
 tester(jj2,jj3)
 ```
 
-## Test of ```quad.3diag()```, $\operatorname{diag}(x^*My)$
+## Test of ```quad.3diag()``` = $\operatorname{diag}(x^*My)$
 
 ```{r}
 (jj1 <- diag(ht(x) %*% M %*% x1))
@@ -154,7 +154,7 @@ tester(jj1,jj3)
 tester(jj2,jj3)
 ```
 
-## Test of ```quad.3tdiag()```, $\operatorname{diag}(xMy^T)$
+## Test of ```quad.3tdiag()``` = $\operatorname{diag}(xMy^T)$
 
 ```{r}
 (jj1 <- diag(y %*% M %*% ht(y1)))
