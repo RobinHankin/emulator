@@ -154,7 +154,7 @@ tester(jj1,jj3)
 tester(jj2,jj3)
 ```
 
-## Test of ```quad.3tdiag()``` = $\operatorname{diag}(xMy^T)$
+## Test of ```quad.3tdiag()``` = $\operatorname{diag}(xMy^*)$
 
 ```{r}
 (jj1 <- diag(y %*% M %*% ht(y1)))
