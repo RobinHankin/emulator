@@ -25,15 +25,14 @@ conjugate of the old functions' value, which would have been terribly
 inefficient.  The actual fix avoids taking more conjugates than
 absolutely necessary.  The vignette checks all the functions in the
 series, including the ones that have not been changed such as
-```quad.form.inv()```.
-
+```quad.form.inv()```.  First load the packages:
 
 ```{r}
 library("emulator")
 library("cmvnorm")
 ```
 
-First set up a square matrix ```M``` with complex entries (NB: not
+Then set up a square matrix ```M``` with complex entries (NB: not
 Hermitian!), and a couple of rectangular matrices, also complex:
 
 ```{r}
@@ -49,6 +48,9 @@ Set up a numerical tester function:
 ```{r}
 tester <- function(a,b,TOL=1e-13){stopifnot(all(abs(a-b)< TOL))}
 ```
+
+(previous versions used a tolerance of ```1e-15```, which was
+occasionally not met).  Now test each function:
 
 ## Test of ```ht(x)``` = $x^*$ = $\overline{x'}$ (Hermitian transpose):
 
