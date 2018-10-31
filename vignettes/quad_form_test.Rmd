@@ -106,7 +106,7 @@ max(abs(jj1-jj2))
 
 ##  Test of ```quad.3form()``` = $x^*My$:
 
-### ```quad.3form.(M,l,r)=cprod(cprod(M,l),r)```
+### ```quad.3form(M,l,r)=cprod(cprod(M,l),r)```
 
 
 ```{r}
@@ -117,7 +117,7 @@ tester(jj1,jj2)
 
 ## Test of ```quad.3tform()``` = $xMy^*$:
 
-### ```quad.3tform.(M,l,r)=tcrossprod(left,tcrossprod(Conj(right),M))```
+### ```quad.3tform(M,l,r)=tcrossprod(left,tcrossprod(Conj(right),M))```
 
 
 ```{r}
@@ -128,7 +128,7 @@ tester(jj1,jj2)
 
 ## Test of ```quad.tform()``` = $xMx^*$:
 
-### ```quad.tform.(M,x)=tcrossprod(x,tcrossprod(Conj(x),M))```
+### ```quad.tform(M,x)=tcrossprod(x,tcrossprod(Conj(x),M))```
 
 ```{r}
 (jj1 <- y %*% M %*% ht(y))
