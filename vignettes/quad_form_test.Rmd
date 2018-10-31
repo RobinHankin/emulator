@@ -25,22 +25,34 @@ conjugate of the old functions' value, which would have been terribly
 inefficient.  The actual fix avoids taking more conjugates than
 absolutely necessary.  The vignette checks all the functions in the
 series, including the ones that have not been changed such as
-```quad.form.inv()```.  First load the packages:
+```quad.form.inv()```.  First load the package:
 
 ```{r}
 library("emulator")
-library("cmvnorm")
+
 ```
 
-Then set up a square matrix ```M``` with complex entries (NB: not
-Hermitian!), and a couple of rectangular matrices, also complex:
+We need a helper function to create random complex matrices (NB: we
+cannot use the ```cmvnorm``` package because that depends on the
+```emulator``` package):
+
+```
+rcm <- function(row,col){
+   matrix(rnorm(row*col)+1i*rnorm(row*col),row,col)
+}
+```
+
+Then use this function to define a square matrix ```M``` with complex
+entries (NB: not Hermitian!), and a couple of rectangular matrices,
+also complex:
 
 ```{r}
-M <- matrix(rcnorm(4),2,2)
-x <- matrix(rcnorm(6),2,3)
-y <- matrix(rcnorm(6),3,2)
-x1 <- matrix(rcnorm(6),2,3)
-y1 <- matrix(rcnorm(6),3,2)
+rcm <- function(row,col){matrix(rnorm(row*col)+1i*rnorm(row*col),row,col)}
+M <- rcm(2,2)
+x <- rcm(2,3)
+y <- rcm(3,2)
+x1 <- rcm(2,3)
+y1 <- rcm(3,2)
 ```
 
 Set up a numerical tester function:
