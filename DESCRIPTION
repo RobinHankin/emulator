@@ -5,7 +5,8 @@ Version: 1.2-19
 Date: 2018-10-31
 Author: Robin K. S. Hankin
 VignetteBuilder: knitr
-Depends: R (>= 3.0.1), mvtnorm,knitr
+Depends: R (>= 3.0.1), mvtnorm
+Suggests: knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 Description:  
  Allows one to estimate the output of a computer program,
