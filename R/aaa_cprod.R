@@ -34,7 +34,7 @@ ht <- function(x){  #Hermitian transpose
 function (M, x, chol = FALSE)
 {
     if (chol == FALSE) {
-       return(drop(cprod(cprod(M, x), x)))
+       return(drop(crossprod(crossprod(M,Conj(x)),x)))
     }
     else {
        jj <- cprod(M, x)
@@ -51,7 +51,7 @@ function (M, x)
 "quad.3form" <-  # left' M right
 function(M,left,right)
 {
- cprod(cprod(M,left),right)
+    crossprod(crossprod(M,Conj(left)),right)
 }  
 
 "quad.3tform" <- function(M,left,right)   # left M right'

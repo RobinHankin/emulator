@@ -84,8 +84,7 @@ tester(jj1,jj2)
 
 ## Test of ```quad.form()``` = $x^*Mx$:
 
-### ```quad.form(M,x)=cprod(cprod(M,x),x)```
-
+### ```quad.form(M,x)=crossprod(crossprod(M,Conj(x)),x))```
 
 ```{r}
 (jj1 <- ht(x) %*% M %*% x)
@@ -106,7 +105,7 @@ max(abs(jj1-jj2))
 
 ##  Test of ```quad.3form()``` = $x^*My$:
 
-### ```quad.3form(M,l,r)=cprod(cprod(M,l),r)```
+### ```quad.3form(M,l,r)=crossprod(crossprod(M,Conj(l)),r)```
 
 
 ```{r}
