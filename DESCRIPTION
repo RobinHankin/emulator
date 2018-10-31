@@ -2,10 +2,10 @@ Package: emulator
 Type: Package
 Title: Bayesian Emulation of Computer Programs
 Version: 1.2-19
-Date: 2018-05-22
+Date: 2018-10-31
 Author: Robin K. S. Hankin
 VignetteBuilder: knitr
-Depends: R (>= 3.0.1), mvtnorm
+Depends: R (>= 3.0.1), mvtnorm,knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 Description:  
  Allows one to estimate the output of a computer program,
