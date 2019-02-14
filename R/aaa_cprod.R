@@ -54,6 +54,12 @@ function(M,left,right)
     crossprod(crossprod(M,Conj(left)),right)
 }  
 
+`quad.3form.inv` <- # left' solve(M) right
+function(M,left,right)
+{
+    drop(cprod(left, solve(M, right)))
+}
+
 "quad.3tform" <- function(M,left,right)   # left M right'
 {
   tcrossprod(left,tcrossprod(Conj(right),M))

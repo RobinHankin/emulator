@@ -2,6 +2,7 @@
 \alias{quad.form}
 \alias{quad.form.inv}
 \alias{quad.3form}
+\alias{quad.3form.inv}
 \alias{quad.tform}
 \alias{quad.3tform}
 \alias{quad.tform.inv}
@@ -42,7 +43,10 @@
       \%*\% M \%*\% r} using nested calls to \code{crossprod()}.  It's
     no faster than calling \code{crossprod()} directly, but makes code
     neater and less error-prone (IMHO)
-    
+
+    \item Function\code{quad.3form.inv(M,l,r)} returns \eqn{l^TM^{-1}r}{t(l)
+      \%*\% solve(M) \%*\% r}
+
     \item Function \code{quad.3tform(M,l,r)} returns \eqn{lMr^T}{l \%*\%
       M \%*\% t(r)} using nested calls to \code{tcrossprod()}.  Again,
     this is to make for neater code
