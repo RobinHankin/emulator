@@ -44,8 +44,8 @@
     no faster than calling \code{crossprod()} directly, but makes code
     neater and less error-prone (IMHO)
 
-    \item Function\code{quad.3form.inv(M,l,r)} returns \eqn{l^TM^{-1}r}{t(l)
-      \%*\% solve(M) \%*\% r}
+    \item Function \code{quad.3form.inv(M,l,r)} returns
+      \eqn{l^TM^{-1}r}{t(l) \%*\% solve(M) \%*\% r}
 
     \item Function \code{quad.3tform(M,l,r)} returns \eqn{lMr^T}{l \%*\%
       M \%*\% t(r)} using nested calls to \code{tcrossprod()}.  Again,
@@ -130,7 +130,7 @@ ht(x)
   calibrator packages' R code, primarily in the interests of elegant
   code, but also speed.  For the problems I usually consider, the
   speedup (of \code{quad.form(M,x)} over \code{t(x) \%*\% M \%*\% x},
-  say) is marginal at best
+  say) is marginal at best.
 }
 \seealso{\code{\link{optimize}}}
 \examples{
