@@ -5,7 +5,7 @@
 \description{
 
   Determines the maximum likelihood regression coeffients for the
-  specified regression basis and correlation matrix~\code{A}.
+  specified regression basis and correlation matrix \code{A}.
 
   The \dQuote{\code{.A}} form needs only \code{A} (and not \code{Ainv}),
   thus removing the need to calculate a matrix inverse.  Note that this

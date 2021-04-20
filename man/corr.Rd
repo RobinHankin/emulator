@@ -3,7 +3,7 @@
 \alias{corr.matrix}
 \title{correlation function for calculating A}
 \description{
-calculates the correlation function between two points in parameter
+Calculates the correlation function between two points in parameter
 space, thus determining the correlation matrix A.
 }
 \usage{

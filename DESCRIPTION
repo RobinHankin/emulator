@@ -5,7 +5,7 @@ Version: 1.2-21
 Authors@R: person(given=c("Robin", "K. S."), family="Hankin", role = c("aut","cre"), email="hankin.robin@gmail.com", comment = c(ORCID = "0000-0001-5982-0415"))
 VignetteBuilder: knitr
 Depends: R (>= 3.0.1), mvtnorm
-Suggests: knitr
+Suggests: knitr,rmarkdown
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 Description:  
  Allows one to estimate the output of a computer program,
@@ -19,8 +19,9 @@ Description:
  input parameters; many climate prediction models fall into this
  class.  The emulator essentially determines Bayesian posterior
  estimates of the PDF of the output of a model, conditioned on results
- from previous runs and a user-specified prior linear model.  A vignette is
- provided and the help pages include examples.
+ from previous runs and a user-specified prior linear model.  The
+ package includes functionality to evaluate quadratic forms 
+ efficiently. 
 License: GPL
 URL: https://github.com/RobinHankin/emulator
 BugReports: https://github.com/RobinHankin/emulator/issues
