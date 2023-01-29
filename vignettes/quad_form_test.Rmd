@@ -13,10 +13,10 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", dev = "png", fig.width = 
 options(width = 80, tibble.width = Inf)
 ```
 
-# Testing for ```quad.form()``` et seq
+# Testing for `quad.form()` et seq
 
 In versions prior to 1.2-19, the emulator package included a serious
-bug in the ```quad.form()``` family of functions in which the complex
+bug in the `quad.form()` family of functions in which the complex
 conjugate of the correct answer was returned (which did not matter in
 my usual use-case because my matrices were Hermitian).  This short
 vignette demonstrates that the bug has been fixed.  Note that the fix
@@ -25,16 +25,15 @@ conjugate of the old functions' value, which would have been terribly
 inefficient.  The actual fix avoids taking more conjugates than
 absolutely necessary.  The vignette checks all the functions in the
 series, including the ones that have not been changed such as
-```quad.form.inv()```.  First load the package:
+`quad.form.inv()`.  First load the package:
 
 ```{r}
 library("emulator")
-
 ```
 
 We need a helper function to create random complex matrices (NB: we
-cannot use the ```cmvnorm``` package because that depends on the
-```emulator``` package):
+cannot use the `cmvnorm` package because that depends on the
+`emulator` package):
 
 ```
 rcm <- function(row,col){
@@ -42,7 +41,7 @@ rcm <- function(row,col){
 }
 ```
 
-Then use this function to define a square matrix ```M``` with complex
+Then use this function to define a square matrix `M` with complex
 entries (NB: not Hermitian!), and a couple of rectangular matrices,
 also complex:
 
@@ -61,10 +60,10 @@ Set up a numerical tester function:
 tester <- function(a,b,TOL=1e-13){stopifnot(all(abs(a-b)< TOL))}
 ```
 
-(previous versions used a tolerance of ```1e-15```, which was
+(previous versions used a tolerance of `1e-15`, which was
 occasionally not met).  Now test each function:
 
-## Test of ```ht(x)``` = $x^*$ = $\overline{x'}$ (Hermitian transpose):
+## Test of `ht(x)` = $x^*$ = $\overline{x'}$ (Hermitian transpose):
 
 ### ```ht(x)=t(Conj(x))```
 
@@ -76,9 +75,9 @@ tester(jj1,jj3)
 tester(jj2,jj3)
 ```
 
-## Test of ```cprod()``` = $x^*y$:
+## Test of `cprod()` = $x^*y$:
 
-### ```cprod(x,y)=crossprod(Conj(x),y)```
+### `cprod(x,y)=crossprod(Conj(x),y)`
 
 ```{r}
 (jj1 <- ht(x) %*% x1)
@@ -86,9 +85,9 @@ tester(jj2,jj3)
 tester(jj1,jj2)
 ```
 
-## Test of ```tcprod()``` = $x y^*$:
+## Test of `tcprod()` = $x y^*$:
 
-### ```tcprod(x,y)=crossprod(x,Conj(y))```
+### `tcprod(x,y)=crossprod(x,Conj(y))`
 
 ```{r}
 (jj1 <- ht(x1) %*% x)
@@ -96,9 +95,9 @@ tester(jj1,jj2)
 tester(jj1,jj2)
 ```
 
-## Test of ```quad.form()``` = $x^*Mx$:
+## Test of `quad.form()` = $x^*Mx$:
 
-### ```quad.form(M,x)=crossprod(crossprod(M,Conj(x)),x))```
+### `quad.form(M,x)=crossprod(crossprod(M,Conj(x)),x))`
 
 ```{r}
 (jj1 <- ht(x) %*% M %*% x)
@@ -106,9 +105,9 @@ tester(jj1,jj2)
 tester(jj1,jj2)
 ```
 
-##  Test of ```quad.form.inv()``` = $x^*M^{-1}x$:
+##  Test of `quad.form.inv()` = $x^*M^{-1}x$:
 
-### ```quad.form.inv(M,x)=cprod(x,solve(M,x))```
+### `quad.form.inv(M,x)=cprod(x,solve(M,x))`
 
 
 ```{r}
@@ -117,9 +116,9 @@ tester(jj1,jj2)
 max(abs(jj1-jj2))
 ```
 
-##  Test of ```quad.3form()``` = $x^*My$:
+##  Test of `quad.3form()` = $x^*My$:
 
-### ```quad.3form(M,l,r)=crossprod(crossprod(M,Conj(l)),r)```
+### `quad.3form(M,l,r)=crossprod(crossprod(M,Conj(l)),r)`
 
 
 ```{r}
@@ -128,9 +127,9 @@ max(abs(jj1-jj2))
 tester(jj1,jj2)
 ```
 
-## Test of ```quad.3tform()``` = $xMy^*$:
+## Test of `quad.3tform()` = $xMy^*$:
 
-### ```quad.3tform(M,l,r)=tcrossprod(left,tcrossprod(Conj(right),M))```
+### `quad.3tform(M,l,r)=tcrossprod(left,tcrossprod(Conj(right),M))`
 
 
 ```{r}
@@ -139,9 +138,9 @@ tester(jj1,jj2)
 tester(jj1,jj2)
 ```
 
-## Test of ```quad.tform()``` = $xMx^*$:
+## Test of `quad.tform()` = $xMx^*$:
 
-### ```quad.tform(M,x)=tcrossprod(x,tcrossprod(Conj(x),M))```
+### `quad.tform(M,x)=tcrossprod(x,tcrossprod(Conj(x),M))`
 
 ```{r}
 (jj1 <- y %*% M %*% ht(y))
@@ -150,9 +149,9 @@ tester(jj1,jj2)
 ```
 
 
-## Test of ```quad.tform.inv()``` = $xM^{-1}x^*$:
+## Test of `quad.tform.inv()` = $xM^{-1}x^*$:
 
-### ```quad.tform.inv(M,x)=quad.form.inv(M,ht(x))```
+### `quad.tform.inv(M,x)=quad.form.inv(M,ht(x))`
 
 ```{r}
 (jj1 <- y %*% solve(M) %*% ht(y))
@@ -160,9 +159,9 @@ tester(jj1,jj2)
 tester(jj1,jj2)
 ```
 
-## Test of ```quad.diag()``` = $\operatorname{diag}(x^*Mx)$ = ```diag(quad.form())```:
+## Test of `quad.diag()` = $\operatorname{diag}(x^*Mx)$ = `diag(quad.form())`:
 
-### ```quad.diag(M,x)=colSums(crossprod(M,Conj(x)) * x)```
+### `quad.diag(M,x)=colSums(crossprod(M,Conj(x)) * x)`
 
 ```{r}
 (jj1 <- diag(ht(x) %*% M %*% x))
@@ -172,9 +171,9 @@ tester(jj1,jj3)
 tester(jj2,jj3)
 ```
 
-##  Test of ```quad.tdiag()``` =  $\operatorname{diag}(xMx^*)$ = ```diag(quad.tform())```:
+##  Test of `quad.tdiag()` =  $\operatorname{diag}(xMx^*)$ = `diag(quad.tform())`:
 
-### ```quad.tdiag(M,x)=rowSums(tcrossprod(Conj(x), M) * x)```
+### `quad.tdiag(M,x)=rowSums(tcrossprod(Conj(x), M) * x)`
 
 
 ```{r}
@@ -185,9 +184,9 @@ tester(jj1,jj3)
 tester(jj2,jj3)
 ```
 
-## Test of ```quad.3diag()``` = $\operatorname{diag}(x^*My)$
+## Test of `quad.3diag()` = $\operatorname{diag}(x^*My)$
 
-### ```quad.3diag(M,l,r)=colSums(crossprod(M, Conj(left)) * right)```
+### `quad.3diag(M,l,r)=colSums(crossprod(M, Conj(left)) * right)`
 
 
 ```{r}
@@ -198,9 +197,9 @@ tester(jj1,jj3)
 tester(jj2,jj3)
 ```
 
-## Test of ```quad.3tdiag()``` = $\operatorname{diag}(xMy^*)$
+## Test of `quad.3tdiag()` = $\operatorname{diag}(xMy^*)$
 
-### ```quad.3tdiag(M,l,r)=colSums(t(left) * tcprod(M, right))```
+### `quad.3tdiag(M,l,r)=colSums(t(left) * tcprod(M, right))`
 
 ```{r}
 (jj1 <- diag(y %*% M %*% ht(y1)))
