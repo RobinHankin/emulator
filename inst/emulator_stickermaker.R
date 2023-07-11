@@ -28,11 +28,11 @@ jj <- interpolant.quick(as.matrix(x), d, toy, scales=fish,
                         Ainv=Ainv,g=TRUE)
 
 png(file="emulator_icon.png",width=1000,height=1000,bg="transparent")
-plot(x,jj$mstar.star,xlim=c(0,1),ylim=c(-3,1),type="l",col="black",lwd=5,axes=FALSE,xlab="",ylab="")
-lines(x,jj$prior,type="l",lwd=2)
-lines(x,jj$mstar.star+1.95*jj$Z,type="l",lty=3,lwd=3)
-lines(x,jj$mstar.star-1.95*jj$Z,type="l",lty=3,lwd=3)
-points(toy,d,pch=16,cex=4)
+plot(x,jj$mstar.star,xlim=c(0,1),ylim=c(-3,1),type="l",col="black",lwd=12,axes=FALSE,xlab="",ylab="")
+lines(x,jj$prior,type="l",lwd=7)
+lines(x,jj$mstar.star+1.95*jj$Z,type="l",lty=3,lwd=5)
+lines(x,jj$mstar.star-1.95*jj$Z,type="l",lty=3,lwd=5)
+points(toy,d,pch=16,cex=8)
 dev.off()
 
 
