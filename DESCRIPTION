@@ -1,7 +1,7 @@
 Package: emulator
 Type: Package
 Title: Bayesian Emulation of Computer Programs
-Version: 1.2-22
+Version: 1.2-23
 Authors@R: person(given=c("Robin", "K. S."), family="Hankin", role = c("aut","cre"), email="hankin.robin@gmail.com", comment = c(ORCID = "0000-0001-5982-0415"))
 VignetteBuilder: knitr
 Depends: R (>= 3.0.1), mvtnorm

@@ -54,6 +54,9 @@
 
 \SweaveOpts{echo=TRUE}
 
+\hfill\includegraphics[width=1in]{\Sexpr{system.file("help/figures/emulator.png",package="emulator")}}
+
+
 \section{Introduction}
 Package \pkg{emulator} of bundle \pkg{BACCO} performs Bayesian
 emulation of computer models.  This document constructs a minimal
@@ -96,9 +99,8 @@ library("emulator")
 @ 
 
 
-<<datagen_design_matrix, echo=false, results=hide>>=
-n <- 30
-val.vig <- latin.hypercube(n,2)
+<<datagen_design_matrix>>=
+val.vig <- as.matrix(read.table("val.txt",header=TRUE))
 @
 
 
@@ -122,19 +124,13 @@ Notes
 \item The parameters are labelled {\tt a} and {\tt b}
 \end{itemize}
 
-
 \subsection{Basis functions: USER TO SUPPLY}
 Now we need to choose a basis function.  Do this by copying {\tt
 basis.toy()} but fiddling with it:
 
 <<basisvig>>=
-basis.vig <- 
-function (x) 
-{
-        out <- c(1, x , x[1]*x[2])
-        names(out) <- c("const", LETTERS[1:2], "interaction")
-        return(out)
-}
+source("basis.R")  # defines basis.vig()
+basis.vig
 @ 
 
 
@@ -146,14 +142,14 @@ that I've changed the basis to be {\tt c(1,a,b,ab)}.
     c(1,x[1],x[2], x[1]*x[2])}. 
 \end{itemize}
 
-<<datagen, echo=false, results=hide>>=
+<<datagen, echo=false>>=
 REAL.BETA <- 1:4
 REAL.SCALES <- c(3,6)
 REAL.SIGMASQUARED <- 0.3
 
 A <- corr.matrix(xold=val.vig,scales=REAL.SCALES)
 
-z.vig  <- 
+z.vig.synthetic  <- 
 as.vector(rmvnorm(n=1,mean=crossprod(REAL.BETA,apply(val.vig,1,basis.vig)),sigma=A*REAL.SIGMASQUARED))
 @ 
 
@@ -163,9 +159,14 @@ The data we have for the {\tt .vig} example is a vector whose elements
 are the output of the code at the points specified in {\tt val.vig}:
 
 <<headzvig>>=
+z.vig <- scan("z.txt")
 head(z.vig)
 summary(z.vig)
 @ 
+
+NB: object {\tt z.vig} was created using the precepts of the Gaussian
+process; the details are given in this vignette but output is
+suppressed.
 
 \section{Data analysis}
 
