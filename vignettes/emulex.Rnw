@@ -10,7 +10,7 @@
 
 
 %% just as usual
-\author{Robin K. S. Hankin\\Auckland University of Technology}
+\author{Robin K. S. Hankin\\University of Stirling}
 \title{Creating a simple \pkg{emulator} case study from scratch: a cookbook}
 
 
