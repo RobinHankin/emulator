@@ -106,7 +106,7 @@ rownames(toy) <- paste("obs",1:nrow(toy),sep=".")
 d.noisy <- as.vector(toy>0.5)+rnorm(length(toy))/40
 
 fish <- 100
-x <- seq(from=-1,to=2,len=1000)
+x <- seq(from=-1,to=2,len=200)
 A <- corr.matrix(toy,scales=fish)
 Ainv <- solve(A)
 

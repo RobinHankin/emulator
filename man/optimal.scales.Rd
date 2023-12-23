@@ -83,16 +83,16 @@ FALSE, func=regressor.basis, ...)
 \examples{
 
 ##First, define some scales:
-fish <- c(1,1,1,1,1,4)
+fish <- c(1,1,4)
 
 ## and a sigmasquared value:
 REAL.SIGMASQ <- 0.3
 
 ## and a real relation:
-real.relation <- function(x){sum( (1:6)*x )}
+real.relation <- function(x){sum( (1:3)*x )}
 
 ## Now a design matrix:
-val  <- latin.hypercube(100,6)
+val  <- latin.hypercube(13,3)
 
 ## apply the real relation:
 d <- apply(val,1,real.relation)
@@ -103,7 +103,8 @@ d.noisy <-  as.vector(rmvnorm(n=1,mean=apply(val,1,real.relation),REAL.SIGMASQ*A
 
 ##  Now see if we can estimate the roughness lengths well.  Remember that
 ##  the true values are those held in vector "fish":
-optimal.scales(val=val, scales.start=rep(1,6), d=d.noisy,
+
+optimal.scales(val=val, scales.start=rep(1,3), d=d.noisy,
        method="SANN",control=list(trace=1000,maxit=3),
        give=FALSE)
 
@@ -113,8 +114,8 @@ optimal.scales(val=val, scales.start=rep(1,6), d=d.noisy,
 #  scale to estimate.  This should be more straightforward:
 
 
-df <- latin.hypercube(40,6)
-fish2 <- rep(2,6)
+df <- latin.hypercube(13,3)
+fish2 <- rep(2,3)
 A2 <- corr.matrix(df,scales=fish2)
 d.noisy <- as.vector(rmvnorm(n=1, mean=apply(df,1,real.relation), sigma=A2))
 
