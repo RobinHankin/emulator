@@ -1,10 +1,9 @@
 citHeader("To cite in publications use:")
 
-citEntry(entry = "Article",
-	 title = {
-             paste("Introducing BACCO, an R bundle for Bayesian Analysis of Computer Code Output")
-         },
-	 author = "R. K. S. Hankin",
+bibentry(
+    bibtype = "Article",
+    title = "Introducing BACCO, an R bundle for Bayesian Analysis of Computer Code Output",
+	 author = person("R. K. S. Hankin"),
          journal = "Journal of Statistical Software",
          year = "2005",
 	 volume = "14",
