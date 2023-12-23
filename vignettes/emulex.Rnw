@@ -129,8 +129,11 @@ Now we need to choose a basis function.  Do this by copying {\tt
 basis.toy()} but fiddling with it:
 
 <<basisvig>>=
-source("basis.R")  # defines basis.vig()
-basis.vig
+basis.vig <-  function (x){
+ out <- c(1, x , x[1]*x[2])
+ names(out) <- c("const", LETTERS[1:2], "interaction")
+ return(out)
+}
 @ 
 
 
