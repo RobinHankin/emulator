@@ -27,7 +27,7 @@ func=regressor.basis)
     given value of \code{scales}.  If the desired distance matrix
     (called \eqn{B}{B} in Oakley) is not diagonal, pass this matrix to
     \code{estimator()} via the \code{pos.def.matrix} argument.}
-  \item{pos.def.matrix}{Positive definite matrix \eqn{B}{B}}.
+  \item{pos.def.matrix}{Positive definite matrix \eqn{B}{B}}
   \item{func}{Function used to determine basis vectors, defaulting
     to \code{regressor.basis} if not given.}
   }
