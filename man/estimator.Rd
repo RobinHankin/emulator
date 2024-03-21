@@ -68,10 +68,10 @@ A vector of observations of the same length as \code{d}.
 }
 \seealso{\code{\link{optimal.scales}}}
 \examples{
-# example has 40 observations on 6 dimensions.
+# example has 11 observations on 6 dimensions.
 # function is just sum( (1:6)*x) where x=c(x_1, ... , x_2)
 
-val <- latin.hypercube(40,6)
+val <- latin.hypercube(11,6)
 colnames(val) <- letters[1:6]
 d <- apply(val,1,function(x){sum((1:6)*x)})
 

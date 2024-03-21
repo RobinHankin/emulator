@@ -92,7 +92,7 @@ REAL.SIGMASQ <- 0.3
 real.relation <- function(x){sum( (1:3)*x )}
 
 ## Now a design matrix:
-val  <- latin.hypercube(13,3)
+val  <- latin.hypercube(7,3)
 
 ## apply the real relation:
 d <- apply(val,1,real.relation)
@@ -114,7 +114,7 @@ optimal.scales(val=val, scales.start=rep(1,3), d=d.noisy,
 #  scale to estimate.  This should be more straightforward:
 
 
-df <- latin.hypercube(13,3)
+df <- latin.hypercube(7,3)
 fish2 <- rep(2,3)
 A2 <- corr.matrix(df,scales=fish2)
 d.noisy <- as.vector(rmvnorm(n=1, mean=apply(df,1,real.relation), sigma=A2))
