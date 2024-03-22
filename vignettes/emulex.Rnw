@@ -32,8 +32,8 @@
 
 \Address{
   Robin K. S. Hankin\\
-  Auckland University of Technology\\
-  Wakefield Street, Auckland, NZ\\
+  University of Stirling\\
+  Scotland\\
   E-mail: \email{hankin.robin@gmail.com}
 }
 %% It is also possible to add a telephone and fax number
