@@ -13,6 +13,12 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", dev = "png", fig.width = 
 options(width = 80, tibble.width = Inf)
 ```
 
+```{r out.width='15%', out.extra='style="float:right; padding:10px"',echo=FALSE}
+knitr::include_graphics(system.file("help/figures/emulator.png", package = "emulator"))
+```
+
+
+
 # Testing for `quad.form()` et seq
 
 In versions prior to 1.2-19, the emulator package included a serious
