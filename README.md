@@ -20,7 +20,7 @@ software.
 
 # Installation
 
-You can install the released version of permutations from
+You can install the released version of `emulator` from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
