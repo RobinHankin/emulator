@@ -3,8 +3,7 @@ function (xold, Ainv, d, give.variance = FALSE, func = regressor.basis)
 {
     H <- regressor.multi(xold, func = func)
     H <- as.matrix(H)
-    out <- solve(quad.form(Ainv, H), cprod(cprod(Ainv, 
-        H), d))
+    out <- solve(quad.form(Ainv, H), cprod(cprod(Ainv, H), d))
     out <- as.vector(out)
     names(out) <- colnames(H)
     if (give.variance) {
