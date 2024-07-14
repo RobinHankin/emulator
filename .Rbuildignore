@@ -4,3 +4,6 @@
 emulator.Rproj
 ^.github$
 ^.devcontainer$
+^inst/emulator_stickermaker.R$
+^inst/niceplot.R$
+^inst/quad_form_test.Rmd$
