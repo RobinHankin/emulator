@@ -37,12 +37,7 @@ function (xold, A, d, give.variance = FALSE, func = regressor.basis)
 function (x1, x2, scales = NULL, pos.def.matrix = NULL, 
     coords = "cartesian", spherical.distance.function = NULL) 
 {
-    if (is.null(scales) & is.null(pos.def.matrix)) {
-        stop("need either scales or a pos.definite.matrix")
-    }
-    if (!is.null(scales) & !is.null(pos.def.matrix)) {
-        stop("scales *and* pos.def.matrix supplied.  corr() needs one only.")
-    }
+    dry(scales, pos.def.matrix)
     if (is.null(pos.def.matrix)) {
         pos.def.matrix <- diag(scales, nrow = length(scales))
     }
@@ -81,12 +76,7 @@ function (xold, yold = NULL, method = 1, distance.function = corr,
       }
       
       pos.def.matrix <- a$pos.def.matrix
-      if (is.null(scales) & is.null(pos.def.matrix)) {
-        stop("need either scales or a pos.definite.matrix")
-      }
-      if (!is.null(scales) & !is.null(pos.def.matrix)) {
-        stop("scales *and* pos.def.matrix supplied.  corr() needs one only.")
-      }
+      dry(scales,pos.def.matrix)
       if (is.null(pos.def.matrix)) {
         pos.def.matrix <- diag(scales, nrow = length(scales))
       }
@@ -157,12 +147,7 @@ function (x, d, xold, Ainv = NULL, A = NULL, use.Ainv = TRUE,
           scales = NULL, pos.def.matrix = NULL, func = regressor.basis,
           give.full.list = FALSE, distance.function=corr, ...) 
 {
-    if (is.null(scales) & is.null(pos.def.matrix)) {
-        stop("need either scales or a pos.definite.matrix (used to calculate tx)")
-    }
-    if (!is.null(scales) & !is.null(pos.def.matrix)) {
-        stop("scales *and* pos.def.matrix supplied.  corr() needs one only.")
-    }
+    dry(scales,pos.def.matrix)
     if (is.null(pos.def.matrix)) {
         pos.def.matrix <- diag(scales,nrow=length(scales))
     }
@@ -236,12 +221,7 @@ return(as.vector(out))
 function (x, d, xold, Ainv=NULL, scales = NULL, pos.def.matrix = NULL, 
     func = regressor.basis, give.Z = FALSE, distance.function=corr, ...) 
 {
-    if (is.null(scales) & is.null(pos.def.matrix)) {
-        stop("need either scales or a pos.definite.matrix")
-    }
-    if (!is.null(scales) & !is.null(pos.def.matrix)) {
-        stop("scales *and* pos.def.matrix supplied.  corr() needs one only.")
-    }
+    dry(scales, pos.def.matrix)
     if (is.null(pos.def.matrix)) {
         pos.def.matrix <- diag(scales,nrow=length(scales))
     }
@@ -291,12 +271,7 @@ function (x, d, xold, Ainv=NULL, scales = NULL, pos.def.matrix = NULL,
 "var.conditional" <-
 function (x, xold, d, A, Ainv, scales = NULL, pos.def.matrix = NULL, 
     func = regressor.basis, distance.function=corr, ...) {
-    if (is.null(scales) & is.null(pos.def.matrix)) {
-      stop("need either scales or a pos.definite.matrix")
-    }
-    if (!is.null(scales) & !is.null(pos.def.matrix)) {
-      stop("scales *and* pos.def.matrix supplied.  corr() needs one only.")
-    }
+    dry(scales,pos.def.matrix)
     if (is.null(pos.def.matrix)) {
       pos.def.matrix <- diag(scales,nrow=length(scales))
     }
@@ -679,9 +654,7 @@ function (number.of.runs, expert.estimates, gaussian = TRUE,
 function (pos.def.matrix = NULL, scales = NULL,  xold,
           use.Ainv = TRUE, d, give_log=TRUE, func = regressor.basis) 
 {
-    if (is.null(scales) & is.null(pos.def.matrix)) {
-        stop("need either scales or a pos.definite.matrix")
-    }
+    dry(scales, pos.def.matrix)
     if (!is.null(scales) & !is.null(pos.def.matrix)) {
         stop("scales *and* pos.def.matrix supplied.  corr() needs one only.")
     }
@@ -733,3 +706,14 @@ function (H, A, d)
     (quad.form.inv(A, d) - quad.form(quad.form.inv(quad.form.inv(A, 
         H), t(solve(A, H))), d))/(n - q - 2)
 }
+
+"dry" <- function(scales, pos.def.matrix){
+    if (is.null(scales) && is.null(pos.def.matrix)) {
+        stop("need either scales or a pos.definite.matrix")
+    }
+    if (!is.null(scales) && !is.null(pos.def.matrix)) {
+        stop("scales *and* pos.def.matrix supplied.  Supply one only.")
+    }
+    return(TRUE)
+}
+
