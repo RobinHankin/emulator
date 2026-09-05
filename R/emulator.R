@@ -696,7 +696,7 @@ function (H, Ainv, d)
     H <- as.matrix(H)
     out <- quad.form(Ainv - quad.form.inv(quad.form(Ainv, H), 
         cprod(H, Ainv)), d)/(n - q - 2)
-    return(Re(out))
+    return(drop(Re(out)))
 }
 "sigmahatsquared.A" <-
 function (H, A, d) 
