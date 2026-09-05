@@ -5,3 +5,8 @@ import("mvtnorm")
 importFrom("graphics", "legend", "lines", "plot", "points")
 importFrom("stats", "optim", "optimize", "qnorm", "qunif")
 importFrom("utils", "write.table")
+importFrom("quadform",
+           "quad.form",
+           "quad.form.inv",
+           "quad.tform",
+           "cprod", "ht")

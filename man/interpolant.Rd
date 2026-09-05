@@ -267,7 +267,7 @@ mins  <- expert.estimates$low
 maxes <- expert.estimates$high
 jj <- t(apply(val,1,normalize))
 
-jj <- as.data.frame(jj) 
+jj <- as.matrix(jj) 
 names(jj) <- names(val)
 val <- jj
 
