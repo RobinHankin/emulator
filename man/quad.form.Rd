@@ -22,6 +22,9 @@
     \CRANpkg{quadform} package, which has more extensive functionality,
     and is maintained.}
 
+  The \CRANpkg{quadform} package defines \code{quad3.form()} et seq, not
+  \code{quad.3form()}, which was the old name.
+  
 }
 \usage{
 quad.form(M, x)

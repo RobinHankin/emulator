@@ -122,14 +122,14 @@ tester(jj1,jj2)
 max(abs(jj1-jj2))
 ```
 
-##  Test of `quad.3form()` = $x^*My$:
+##  Test of `quad3.form()` = $x^*My$:
 
-### `quad.3form(M,l,r)=crossprod(crossprod(M,Conj(l)),r)`
+### `quad3.form(M,l,r)=crossprod(crossprod(M,Conj(l)),r)`
 
 
 ```{r}
 (jj1 <- ht(x) %*% M %*% x1)
-(jj2 <- quad.3form(M,x,x1))
+(jj2 <- quad3.form(M,x,x1))
 tester(jj1,jj2)
 ```
 
@@ -197,7 +197,7 @@ tester(jj2,jj3)
 
 ```{r}
 (jj1 <- diag(ht(x) %*% M %*% x1))
-(jj2 <- diag(quad.3form(M,x,x1)))
+(jj2 <- diag(quad3.form(M,x,x1)))
 (jj3 <- quad.3diag(M,x,x1))
 tester(jj1,jj3)
 tester(jj2,jj3)

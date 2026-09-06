@@ -8,14 +8,14 @@ importFrom("utils", "write.table")
 importFrom("quadform",
            "quad.form",
            "quad.form.inv",
-           "quad.3form",
+           "quad3.form",
            "quad.tform",
            "cprod", "ht", "tcprod")
 
 export(
     "quad.form",
     "quad.form.inv",
-    "quad.3form",
+    "quad3.form",
     "quad.tform",
     "cprod",
     "ht",
