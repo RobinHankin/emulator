@@ -10,3 +10,6 @@ importFrom("quadform",
            "quad.form.inv",
            "quad.tform",
            "cprod", "ht")
+
+export("quad.form", "quad.form.inv", "quad.tform", "cprod", "ht")
+
