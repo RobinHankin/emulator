@@ -9,7 +9,7 @@ importFrom("quadform",
            "quad.form",
            "quad.form.inv",
            "quad.tform",
-           "cprod", "ht")
+           "cprod", "ht", "tcprod")
 
 export(
     "quad.form",
@@ -20,4 +20,3 @@ export(
     "ht",
     "tcprod"
 )
-
