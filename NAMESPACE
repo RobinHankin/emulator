@@ -11,5 +11,5 @@ importFrom("quadform",
            "quad.tform",
            "cprod", "ht")
 
-export("quad.form", "quad.form.inv", "quad.tform", "cprod", "ht")
+export("quad.form", "quad.form.inv", "quad.3form", "quad.tform", "cprod", "ht")
 
