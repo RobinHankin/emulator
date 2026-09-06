@@ -21,3 +21,7 @@ export(
     "ht",
     "tcprod"
 )
+
+
+# quad.3form() [defined in this package] is legacy, this will be removed in due course
+export("quad.3form") 

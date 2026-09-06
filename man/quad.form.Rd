@@ -32,9 +32,8 @@
 quad.form(M, x)
 quad.form.inv(M, x)
 quad.tform(M, x)
-quad3.form(M,left,right)
-quad.3form(M,left,right)
-cprod(x,y)
+quad3.form(M, left, right)
+cprod(x, y)
 ht(x)
 }
 \arguments{
