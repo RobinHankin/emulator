@@ -10,6 +10,7 @@
 \alias{quad.tdiag}
 \alias{quad.3diag}
 \alias{quad.3tdiag}
+\alias{quad3.form}
 \alias{cprod}
 \alias{tcprod}
 \alias{ht}
@@ -30,12 +31,16 @@
 quad.form(M, x)
 quad.form.inv(M, x)
 quad.tform(M, x)
+quad3.form(M,left,right)
 cprod(x,y)
 ht(x)
 }
 \arguments{
   \item{M}{Square matrix of size \eqn{n\times n}{n*n}}
-  \item{x,y}{Matrix of size \eqn{n\times p}{n*p}, or vector of length \eqn{n}}
+  \item{x, y}{Matrix of size \eqn{n\times p}{n*p}, or vector of length \eqn{n}}
+  \item{left, right}{In function \code{quad3.form()}, matrices with
+    \eqn{n} rows and arbitrary number of columns.  But see the
+    \code{quadform} package for details.}
 }
 \details{See the \CRANpkg{quadform} package for further detail.}
 \author{Robin K. S. Hankin}
