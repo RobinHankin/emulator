@@ -24,7 +24,8 @@
     and is maintained.}
 
   The \CRANpkg{quadform} package defines \code{quad3.form()} et seq, not
-  \code{quad.3form()}, which was the old name.
+  \code{quad.3form()}, which was the old name.   Function
+  \code{quad.3form()} will soon be deprecated.
   
 }
 \usage{
@@ -32,6 +33,7 @@ quad.form(M, x)
 quad.form.inv(M, x)
 quad.tform(M, x)
 quad3.form(M,left,right)
+quad.3form(M,left,right)
 cprod(x,y)
 ht(x)
 }
